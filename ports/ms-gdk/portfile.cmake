@@ -1,4 +1,4 @@
-set(GDK_EDITION_NUMBER 250400)
+set(GDK_EDITION_NUMBER 250403)
 
 # The GDK contains a combination of static C++ libraries and DLL-based extension libraries.
 vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
@@ -6,7 +6,7 @@ vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 vcpkg_download_distfile(ARCHIVE
     URLS "https://www.nuget.org/api/v2/package/Microsoft.GDK.PC/${VERSION}"
     FILENAME "ms-gdk.${VERSION}.zip"
-    SHA512 3dd7b14b68b0f8869c556d72b91a1e79c102e5357d4ce83033f803c2e15681364de127c26cb23ab4a8946e676c75b6ddf69eb7f65e354800c30e7566c9a4fe39
+    SHA512 a7ece6899aca25dba4c0c4bb8947502090c2576beef677a33b878cdf8babdc18925f6349161f5b6a518d7c1c7f5a7ac66f23983147672f67e9067acb2004e1c8
 )
 
 vcpkg_extract_source_archive(
@@ -75,4 +75,10 @@ file(INSTALL "${PACKAGE_PATH}/native/bin/GameConfigEditorDependencies" DESTINATI
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 
+# Uses the cpprestsdk port instead
+file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/include/cpprest")
+file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/include/pplx")
+
 vcpkg_install_copyright(FILE_LIST ${LICENSE_FILES})
+
+message(STATUS "BY USING THE SOFTWARE, YOU ACCEPT THESE TERMS: https://www.nuget.org/packages/Microsoft.GDK.PC/${VERSION}/License")
